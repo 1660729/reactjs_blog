@@ -24,7 +24,7 @@ const RecentPosts = (props) => {
                     doesn't land, isn't lesser creeping. Abundantly you called signs waters 
                     yielding he cattle greater were evenin...
                 </p>
-                <button>Read more</button>
+                <button className="btnReadMore">Read more</button>
             </div>
         </Card>
     </div>

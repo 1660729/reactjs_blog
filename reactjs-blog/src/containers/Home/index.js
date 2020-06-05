@@ -4,6 +4,7 @@ import Card from '../../components/UI/Card';
 import Sidebar from '../../components/Sidebar';
 import RecentPosts from './RecentPosts';
 import blogData from '../../data/blog.json';
+import Layout from '../../components/Layout';
 
 const SideImage = props => {
     return (
@@ -17,24 +18,22 @@ const imgAr = blogData.data.map(post => post.blogImage)
 
 const ImageGallary = props => (
     <div className="gallaryPost" style={props.gallaryStyle}>
-        <section style={{width: '70%'}}>
+        <section style={{width: props.largeWidth}}>
             <div className="mainImageWrapper">
                 <img src={require("../../blogPostImages/" + props.imagesArray[0])} />
             </div>
         </section>
-        <section className={"sideImageWrapper"} style={{width: '30%'}}>
-            <SideImage 
-                height={props.sideImageHeight}
-                src={require("../../blogPostImages/" + props.imagesArray[1])}
-            />
-            <SideImage 
-                height={props.sideImageHeight}
-                src={require("../../blogPostImages/" + props.imagesArray[2])}
-            />
-            <SideImage 
-                height={props.sideImageHeight}
-                src={require("../../blogPostImages/" + props.imagesArray[3])}
-            />
+        <section className={"sideImageWrapper"} style={{width: props.smallWidth}}>
+
+            {
+                props.imagesArray.map(image => 
+                    <SideImage 
+                    height={props.sideImageHeight}
+                    src={require("../../blogPostImages/" + image)}
+                    />    
+                )
+            }
+            
         </section>
     </div>
 )
@@ -55,7 +54,6 @@ const Home = props => {
     return (
         <div>
             <Card >
-
                 <ImageGallary
                     largeWidth="70%"
                     smallWidth="30%"
@@ -63,13 +61,11 @@ const Home = props => {
                     gallaryStyle={gallaryStyle}
                     imagesArray = {imgAr}
                 />
-
             </Card>
 
-            <section className="homeContainer">
+            <Layout>
                 <RecentPosts style={{width: '70%'}} />
-                <Sidebar/>
-            </section>
+            </Layout>  
             
         </div>
     );
